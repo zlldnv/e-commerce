@@ -1,14 +1,17 @@
 import React, {useState} from "react";
+
 import {MenuItem} from "../MenuItem/MenuItem";
 import "./styles.scss";
 import {sections as sectionsData} from "../../pages/mock/directory.data";
+import {from} from "rxjs";
 
 export const Directory = () => {
   const [sections] = useState(sectionsData);
+
   return (
     <div className="directory-menu">
-      {sections.map(({title, imageUrl, id}) => (
-        <MenuItem key={id} title={title} imageUrl={imageUrl}></MenuItem>
+      {sections.map(({id, ...sectionProps}) => (
+        <MenuItem key={id} {...sectionProps}></MenuItem>
       ))}
     </div>
   );
