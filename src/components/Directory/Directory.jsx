@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import {MenuItem} from "../MenuItem/MenuItem";
 import "./styles.scss";
-import {sections as sectionsData} from "../../pages/mock/directory.data";
+import {sections as sectionsData} from "../../mock/directory.data";
 import {from} from "rxjs";
 
 export const Directory = () => {
