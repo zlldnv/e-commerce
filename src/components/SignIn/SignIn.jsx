@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {FormInput, CustomButton} from "components";
+import {signInWithGoogle} from "firebaseConfig";
 import "./styles.scss";
 
 export const SignIn = () => {
@@ -31,9 +32,12 @@ export const SignIn = () => {
           required
           handleChange={({target: {value}}) => setPassword(value)}
         />
-        <CustomButton type="submit" value="Submit form">
-          Sign in
-        </CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit">Sign in</CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogle>
+            Sign in with Google
+          </CustomButton>
+        </div>
       </form>
     </div>
   );
