@@ -6,4 +6,4 @@ export * from "./PreviewCollection";
 export * from "./SignIn";
 export * from "./FormInput";
 export * from "./CustomButton";
- 
+export * from "./SignUp";
