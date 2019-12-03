@@ -3,26 +3,27 @@ import {Route, Switch} from "react-router-dom";
 import {ShopPage, HomePage, Login} from "pages";
 import {auth, createUserProfileDocument} from "firebaseConfig";
 import {Header} from "components";
+import {setCurrentUser} from "midleware/user/actions";
+import {connect} from "react-redux";
 import "./App.css";
 
-const App = () => {
-  const [user, setUser] = useState(null);
+const App = ({setCurrentUser}) => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapshot => {
-          setUser({id: snapshot.id, ...snapshot.data()});
+          setCurrentUser({id: snapshot.id, ...snapshot.data()});
         });
-      } else setUser(userAuth);
+      } else setCurrentUser(userAuth);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [setCurrentUser]);
 
   return (
     <div className="App">
-      <Header curentUser={user} />
+      <Header />
       <Switch>
         <Route exact path="/shop" component={ShopPage} />
         <Route exact path="/" component={HomePage} />
@@ -32,4 +33,6 @@ const App = () => {
   );
 };
 
-export default App;
+const mapDispatchToProps = dispatch => ({setCurrentUser: user => dispatch(setCurrentUser(user))});
+
+export default connect(null, mapDispatchToProps)(App);

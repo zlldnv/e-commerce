@@ -1,10 +1,15 @@
 import React from "react";
+import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {auth} from "firebaseConfig";
 import {ReactComponent as Logo} from "../../assets/crown.svg";
 import "./styles.scss";
 
-export const Header = ({curentUser}) => (
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+const HeaderComponent = ({currentUser}) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <Logo className="logo" />
@@ -16,7 +21,7 @@ export const Header = ({curentUser}) => (
       <Link className="option" to="/contact">
         CONTACT
       </Link>
-      {curentUser ? (
+      {currentUser ? (
         <div className="option" onClick={() => auth.signOut()}>
           Sign out
         </div>
@@ -28,3 +33,5 @@ export const Header = ({curentUser}) => (
     </div>
   </div>
 );
+
+export const Header = connect(mapStateToProps)(HeaderComponent);
