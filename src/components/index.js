@@ -7,3 +7,5 @@ export * from "./SignIn";
 export * from "./FormInput";
 export * from "./CustomButton";
 export * from "./SignUp";
+export * from "./cartIcon";
+export * from "./CartDropdown";
