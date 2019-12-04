@@ -9,3 +9,4 @@ export * from "./CustomButton";
 export * from "./SignUp";
 export * from "./cartIcon";
 export * from "./CartDropdown";
+export * from "./CartItem";
