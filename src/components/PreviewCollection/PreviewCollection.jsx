@@ -10,7 +10,7 @@ export const PreviewCollection = ({title, items}) => {
         {items
           .filter((item, idx) => idx < 4)
           .map(({id, ...itemProps}) => (
-            <CollectionItem key={id} {...itemProps}/>
+            <CollectionItem key={id} item={{...itemProps}} />
           ))}
       </div>
     </div>
