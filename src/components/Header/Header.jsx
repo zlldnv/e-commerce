@@ -4,12 +4,12 @@ import {Link} from "react-router-dom";
 import {auth} from "firebaseConfig";
 import {CartIcon, CartDropdown} from "components";
 import {ReactComponent as Logo} from "../../assets/crown.svg";
+import {createStructuredSelector} from "reselect";
+import {cartHiddenSelector} from "midleware/cart/selectors";
+import {currentUserSelector} from "midleware/user/selectors";
 import "./styles.scss";
 
-const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
-  currentUser,
-  hidden
-});
+const mapStateToProps = createStructuredSelector({currentUser: currentUserSelector, hidden: cartHiddenSelector});
 
 const HeaderComponent = ({currentUser, hidden}) => (
   <div className="header">

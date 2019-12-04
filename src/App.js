@@ -1,10 +1,12 @@
 import React, {useEffect} from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
-import {ShopPage, HomePage, Login} from "pages";
+import {ShopPage, HomePage, Login, Checkout} from "pages";
 import {auth, createUserProfileDocument} from "firebaseConfig";
 import {Header} from "components";
 import {setCurrentUser} from "midleware/user/actions";
 import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {currentUserSelector} from "midleware/user/selectors";
 import "./App.css";
 
 const App = ({currentUser, setCurrentUser}) => {
@@ -25,8 +27,9 @@ const App = ({currentUser, setCurrentUser}) => {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path="/shop" component={ShopPage} />
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" render={() => (currentUser ? <Redirect to="/" /> : <Login />)} />
       </Switch>
     </div>
@@ -35,6 +38,6 @@ const App = ({currentUser, setCurrentUser}) => {
 
 const mapDispatchToProps = dispatch => ({setCurrentUser: user => dispatch(setCurrentUser(user))});
 
-const mapStateToProps = ({user}) => ({currentUser: user.currentUser});
+const mapStateToProps = createStructuredSelector({currentUser: currentUserSelector});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
