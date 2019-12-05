@@ -1,3 +1,5 @@
+
+
 export * from "./CollectionItem";
 export * from "./Directory";
 export * from "./Header";
@@ -10,3 +12,6 @@ export * from "./SignUp";
 export * from "./cartIcon";
 export * from "./CartDropdown";
 export * from "./CartItem";
+export * from "./CheckoutItem";
+
+
