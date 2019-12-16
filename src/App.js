@@ -28,7 +28,7 @@ const App = ({currentUser, setCurrentUser}) => {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/shop" component={ShopPage} />
+        <Route path="/shop" component={ShopPage} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/login" render={() => (currentUser ? <Redirect to="/" /> : <Login />)} />
       </Switch>

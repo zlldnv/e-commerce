@@ -1,17 +1,18 @@
-import React, {useState} from "react";
-
+import React from "react";
+import {connect} from "react-redux";
+import {directorySectionsSelector} from "midleware/directory/selectors";
+import {createStructuredSelector} from "reselect";
 import {MenuItem} from "../MenuItem/MenuItem";
 import "./styles.scss";
-import {sections as sectionsData} from "../../mock/directory.data";
 
-export const Directory = () => {
-  const [sections] = useState(sectionsData);
+const mapStateToProps = createStructuredSelector({sections: directorySectionsSelector});
 
-  return (
-    <div className="directory-menu">
-      {sections.map(({id, ...sectionProps}) => (
-        <MenuItem key={id} {...sectionProps}></MenuItem>
-      ))}
-    </div>
-  );
-};
+export const DirectoryComponent = ({sections}) => (
+  <div className="directory-menu">
+    {sections.map(({id, ...sectionProps}) => (
+      <MenuItem key={id} {...sectionProps}></MenuItem>
+    ))}
+  </div>
+);
+
+export const Directory = connect(mapStateToProps)(DirectoryComponent);

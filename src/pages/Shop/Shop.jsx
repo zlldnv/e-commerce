@@ -1,14 +1,20 @@
-import React, {useState} from "react";
-import {SHOP_DATA} from "../../mock/directory.data";
-import {PreviewCollection} from "../../components/PreviewCollection/PreviewCollection";
+import React from "react";
+import { CollectionsOverview } from "components";
+import { Collection } from "pages";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 
 export const ShopPage = () => {
-  const [collections] = useState(SHOP_DATA);
+  const { path } = useRouteMatch();
   return (
     <div>
-      {collections.map(({id, ...otherProps}) => (
-        <PreviewCollection key={id} {...otherProps } />
-      ))}
+      <Switch>
+        <Route exact path={`${path}`} component={CollectionsOverview} />
+        <Route
+          exact
+          path={`${path}/:collectionId`}
+          component={Collection}
+        ></Route>
+      </Switch>
     </div>
   );
 };

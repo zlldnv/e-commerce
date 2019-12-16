@@ -1,5 +1,3 @@
-
-
 export * from "./CollectionItem";
 export * from "./Directory";
 export * from "./Header";
@@ -13,5 +11,4 @@ export * from "./cartIcon";
 export * from "./CartDropdown";
 export * from "./CartItem";
 export * from "./CheckoutItem";
-
-
+export * from "./CollectionsOverview";
