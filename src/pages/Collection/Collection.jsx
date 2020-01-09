@@ -15,7 +15,7 @@ const mapStateToProps = (
   collection: collectionSelector(collectionId)(state)
 });
 
-export const CollectionComponent = ({ collection, ...rest }) => {
+export const CollectionComponent = ({ collection }) => {
   const { title, items } = collection;
   return (
     <div className="collection-page">

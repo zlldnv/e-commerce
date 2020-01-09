@@ -4,7 +4,7 @@ const shopSelector = ({ shop }) => shop;
 
 export const collectionsSelector = createSelector(
   [shopSelector],
-  ({ collections }) => Object.keys(collections).map(key => collections[key])
+  ({ collections }) => collections
 );
 
 export const collectionSelector = collectionUrlParam =>

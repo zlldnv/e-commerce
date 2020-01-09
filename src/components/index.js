@@ -12,3 +12,4 @@ export * from "./CartDropdown";
 export * from "./CartItem";
 export * from "./CheckoutItem";
 export * from "./CollectionsOverview";
+export * from "./StripeButton";
