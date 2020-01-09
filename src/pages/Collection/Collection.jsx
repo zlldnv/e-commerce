@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { CollectionItem } from "components";
-import { useRouteMatch } from "react-router-dom";
 import "./styles.scss";
 import { collectionSelector } from "midleware/shop/selectors";
 
@@ -17,7 +16,6 @@ const mapStateToProps = (
 });
 
 export const CollectionComponent = ({ collection, ...rest }) => {
-  console.log(rest);
   const { title, items } = collection;
   return (
     <div className="collection-page">
