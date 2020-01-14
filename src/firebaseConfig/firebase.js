@@ -24,10 +24,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   const spapshot = userRef.get();
 
   if (!spapshot.exists) {
-    const {displayName, email} = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
-      await userRef.set({displayName, email, createdAt, ...additionalData});
+      await userRef.set({ displayName, email, createdAt, ...additionalData });
     } catch (error) {
       console.log("error creating user", error.message);
     }
@@ -37,7 +37,33 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 };
 
 const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({prompt: "select_account"});
+provider.setCustomParameters({ prompt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
+
+export const addCollectionAndDocuments = async (
+  collectionkey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionkey);
+  const batch = firestore.batch();
+  console.log(objectsToAdd);
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
+};
+
+export const convertCollectionSnapshotToMap = collection =>
+  collection.docs.reduce((acc, doc) => {
+    const { title, items } = doc.data();
+    acc[title.toLowerCase()] = {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+    return acc;
+  }, {});
 
 export default firebase;

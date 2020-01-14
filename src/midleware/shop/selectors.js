@@ -8,7 +8,11 @@ export const collectionsSelector = createSelector(
 );
 
 export const collectionSelector = collectionUrlParam =>
-  createSelector(
-    [collectionsSelector],
-    collections => collections[collectionUrlParam]
+  createSelector([collectionsSelector], collections =>
+    collections ? collections[collectionUrlParam] : []
   );
+
+export const collectionFetchingSelector = createSelector(
+  [shopSelector],
+  ({ isFetching }) => isFetching
+);

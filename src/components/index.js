@@ -13,3 +13,4 @@ export * from "./CartItem";
 export * from "./CheckoutItem";
 export * from "./CollectionsOverview";
 export * from "./StripeButton";
+export * from "./WithSpinner";
