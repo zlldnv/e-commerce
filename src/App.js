@@ -11,18 +11,18 @@ import { currentUserSelector } from "midleware/user/selectors";
 import "./App.css";
 
 const App = ({ currentUser, setCurrentUser }) => {
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapshot => {
-          setCurrentUser({ id: snapshot.id, ...snapshot.data() });
-        });
-      } else setCurrentUser(userAuth);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(async userAuth => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
+  //       userRef.onSnapshot(snapshot => {
+  //         setCurrentUser({ id: snapshot.id, ...snapshot.data() });
+  //       });
+  //     } else setCurrentUser(userAuth);
+  //   });
 
-    return () => unsubscribe();
-  }, [setCurrentUser]);
+  //   return () => unsubscribe();
+  // }, [setCurrentUser]);
 
   return (
     <div className="App">

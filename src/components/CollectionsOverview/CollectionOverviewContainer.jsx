@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { compose } from "redux";
 import { collectionFetchingSelector } from "midleware/shop/selectors";
 import { WithSpinner, CollectionsOverview } from "components";
 

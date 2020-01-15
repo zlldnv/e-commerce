@@ -3,13 +3,13 @@ import { CollectionOverviewContainer } from "components";
 import { CollectionContainer } from "pages";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { connect } from "react-redux";
-import { fetchCollectionsStartAsync } from "midleware/shop/actions";
+import { fetchCollectionsStart } from "midleware/shop/actions";
 
-export const ShopPageComponent = ({ fetchCollectionsStartAsync }) => {
+export const ShopPageComponent = ({ fetchCollectionsStart }) => {
   const { path } = useRouteMatch();
   useEffect(() => {
-    fetchCollectionsStartAsync();
-  }, []);
+    fetchCollectionsStart();
+  }, [fetchCollectionsStart]);
 
   return (
     <Switch>
@@ -24,7 +24,7 @@ export const ShopPageComponent = ({ fetchCollectionsStartAsync }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchCollectionsStartAsync: () => dispatch(fetchCollectionsStartAsync())
+  fetchCollectionsStart: () => dispatch(fetchCollectionsStart())
 });
 
 export const ShopPage = connect(null, mapDispatchToProps)(ShopPageComponent);
