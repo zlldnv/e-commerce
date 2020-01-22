@@ -1,9 +1,17 @@
-import React, {useState} from "react";
-import {FormInput, CustomButton} from "components";
-import {auth, createUserProfileDocument} from "firebaseConfig";
+import React, { useState } from "react";
+import { FormInput, CustomButton } from "components";
+import { signUpStart } from "midleware/user/actions";
+import { connect } from "react-redux";
 import "./styles.scss";
+import { dispatch } from "../../../node_modules/rxjs/internal/observable/pairs";
 
-export const SignUp = () => {
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = (dispatch = {
+  signUpStart: userCred => dispatch(signUpStart(userCred))
+});
+
+export const SignUpComponent = ({ signUpStart }) => {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,16 +22,12 @@ export const SignUp = () => {
       alert("passwords don't match");
       return;
     }
+    signUpStart({ displayName, email, password });
 
-    try {
-      const {user} = await auth.createUserWithEmailAndPassword(email, password);
-      await createUserProfileDocument(user, {displayName});
-      console.log(user);
-      setDisplayName("");
-      setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-    } catch {}
+    setDisplayName("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
   };
   return (
     <div className="sign-up">
@@ -67,3 +71,8 @@ export const SignUp = () => {
     </div>
   );
 };
+
+export const SignUp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUpComponent);
